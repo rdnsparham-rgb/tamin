@@ -5,7 +5,7 @@ green='\e[1;32m'
 reset='\e[0m'
 
 clear
-echo -e "aparat : parham008"
+echo -e "Telegram : @configfars"
 echo ""
 echo "Select :"
 echo "1) v2ray config"
