@@ -14,7 +14,7 @@ echo ""
 read -p "Enter number: " num
 
 if [ "$num" = "1" ]; then
-    echo "Getting a random V2Ray config..."
+    echo "Create V2Ray config..."
     sleep 2
 
     # دانلود لیست
@@ -27,7 +27,7 @@ if [ "$num" = "1" ]; then
 fi
 
 if [ "$num" = "2" ]; then
-    echo "Getting a random Telegram proxy..."
+    echo "Create Telegram proxy..."
     sleep 2
 
     # دانلود پروکسی‌ها
