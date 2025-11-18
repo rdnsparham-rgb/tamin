@@ -10,7 +10,7 @@ colors=('\e[1;31m' '\e[1;33m' '\e[1;32m' '\e[1;36m' '\e[1;34m' '\e[1;35m')
 
 # تابع رنگین‌کمانی aparat
 rainbow() {
-    text="aparat : parham008 ERROR (v2ray servers may not work properly) "
+    text="aparat : parham008"
     len=${#text}
     for ((i=0; i<$len; i++)); do
         c=${text:$i:1}
@@ -82,7 +82,7 @@ while true; do
     clear
     rainbow
     echo -e "${yellow}Select :${reset}"
-    echo -e "${yellow}1) V2Ray config${reset}"
+    echo -e "${yellow}1) V2Ray config (v2ray servers may not work properly)${reset}"
     echo -e "${yellow}2) Proxy Telegram${reset}"
     echo -e "${yellow}3) Scan IPv4 (clean IP)${reset}"
     echo -e "${yellow}4) Exit${reset}"
