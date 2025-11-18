@@ -10,7 +10,7 @@ colors=('\e[1;31m' '\e[1;33m' '\e[1;32m' '\e[1;36m' '\e[1;34m' '\e[1;35m')
 
 # تابع رنگین‌کمانی aparat
 rainbow() {
-    text="aparat : parham008 ERROR 404 "
+    text="aparat : parham008 /ERROR 404 "
     len=${#text}
     for ((i=0; i<$len; i++)); do
         c=${text:$i:1}
@@ -27,21 +27,78 @@ check_ping() {
     return $?
 }
 
-# حلقه اصلی
+# 🔍 تابع اسکن IP (گزینه 3)
+scan_ip() {
+    echo ""
+    echo "🔍 Scanning for clean IPs (ping < 150ms)..."
+    echo ""
+
+    clean_found=false
+
+    while [ "$clean_found" = false ]; do
+        
+        ip="$((RANDOM % 256)).$((RANDOM % 256)).$((RANDOM % 256)).$((RANDOM % 256))"
+        echo "Testing: $ip"
+
+        ping_output=$(ping -c 1 -W 2 $ip 2>/dev/null)
+
+        if [ $? -eq 0 ]; then
+            ms=$(echo "$ping_output" | grep -oP 'time=\K[0-9\.]+')
+
+            if [ -n "$ms" ]; then
+                echo "Ping: ${ms}ms"
+
+                ms_int=${ms%.*}
+
+                if [ "$ms_int" -lt 150 ]; then
+                    echo -e "${green}✔ CLEAN IP FOUND: $ip (${ms}ms)${reset}"
+                    clean_found=true
+                    final_ip="$ip"
+                else
+                    echo -e "${red}❌ Not clean (${ms_int}ms)${reset}"
+                fi
+            else
+                echo "✖ No ms detected"
+            fi
+
+        else
+            echo "✖ No response"
+        fi
+
+        echo "---------------------"
+    done
+
+    echo ""
+    echo "===== FINAL CLEAN IP ====="
+    echo "$final_ip"
+
+    echo ""
+    read -p "1) continue" back
+}
+
+# ================= حلقه اصلی =================
+
 while true; do
     clear
     rainbow
     echo -e "${yellow}Select :${reset}"
-    echo -e "${yellow}1) v2ray config${reset}"
-    echo -e "${yellow}2) proxy telegram${reset}"
-    echo -e "${yellow}3) Exit${reset}"
+    echo -e "${yellow}1) V2Ray config${reset}"
+    echo -e "${yellow}2) Proxy Telegram${reset}"
+    echo -e "${yellow}3) Scan IPv4 (clean IP)${reset}"
+    echo -e "${yellow}4) Exit${reset}"
     echo ""
     read -p "Enter number: " num
 
-    # گزینه 3 → خروج کامل
-    if [ "$num" = "3" ]; then
+    # گزینه ۴ → خروج کامل
+    if [ "$num" = "4" ]; then
         echo -e "${red}Exiting...${reset}"
         exit 0
+    fi
+
+    # گزینه ۳ → اسکن IP
+    if [ "$num" = "3" ]; then
+        scan_ip
+        continue
     fi
 
     # ------------------ گزینه ۱ (V2Ray) ------------------
