@@ -10,7 +10,7 @@ colors=('\e[1;31m' '\e[1;33m' '\e[1;32m' '\e[1;36m' '\e[1;34m' '\e[1;35m')
 
 # تابع رنگین‌کمانی aparat
 rainbow() {
-    text="aparat : parham008 "
+    text="aparat : parham008 /ERROR 404 "
     len=${#text}
     for ((i=0; i<$len; i++)); do
         c=${text:$i:1}
